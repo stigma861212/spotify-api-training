@@ -1,16 +1,19 @@
-import axios from 'axios';
 import { redirectToSpotifyAuthorize } from './authorize';
 import { exchangeCodeForToken } from './token';
+import { Page } from './enums/pageStatus';
 
+//#region 添加contextBridge所需監聽、發送事件
 window.electronAPI.testPath((_event, value) => {
     console.log("testPath", value);
 })
+//#endregion
 
 // dom載入完成時觸發檢查
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOMContentLoaded", window.location.href);
 
     // TODO:需檢查當前localStorage有沒有資料，有就要直接跳轉頁面過去
+    checkStore();
     handleRedirect();
 });
 
@@ -21,6 +24,17 @@ document.getElementById('loginButton').addEventListener('click', () => {
     // TEMP:
     // window.electronAPI.switchPage("indexNew.html");
 });
+
+function checkStore() {
+    const accessToken = localStorage.getItem("access_token");
+    const refreshToken = localStorage.getItem('refresh_token');
+    const expiresIn = localStorage.getItem('expires_in');
+
+    if (accessToken && refreshToken && expiresIn) {
+        console.log("have join this experience");
+        window.electronAPI.switchPage(Page.MainPage);
+    }
+}
 
 async function handleRedirect() {
     console.log("handleRedirect");
@@ -46,20 +60,10 @@ async function handleRedirect() {
 
     if (authCode) {
         await exchangeCodeForToken(authCode).catch(console.error);
-        // window.history.pushState({}, null, '/');
+        window.history.pushState({}, null, '/');
+        checkStore();
 
-        const accessToken = localStorage.getItem("access_token");
-        const refreshToken = localStorage.getItem('refresh_token');
-        const expiresIn = localStorage.getItem('expires_in');
-
-        console.log("accessToken", accessToken);
-        console.log("refreshToken", refreshToken);
-        console.log("expiresIn", expiresIn);
-
-        // TODO:使用token達到跳轉頁面與取得資料
-
-        window.electronAPI.switchPage("main.html");
-
+        // // TEMP: 待移轉
         // const getUserInfo = async (accessToken: string) => {
         //     try {
         //         const response = await axios.get('https://api.spotify.com/v1/me', {
@@ -74,7 +78,7 @@ async function handleRedirect() {
         //     }
         // };
 
-        // // TEMP:取得使用者資料
+        // // NOTE:取得使用者資料
         // getUserInfo(accessToken).then(data => {
         //     console.log("data", data);
         // });

@@ -1,4 +1,3 @@
-// auth/token.ts
 import axios from 'axios';
 import { ITokenResponse } from './type/token.interface';
 import { IClientData } from './type/global.interface';
