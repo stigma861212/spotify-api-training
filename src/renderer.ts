@@ -2,6 +2,11 @@ import { redirectToSpotifyAuthorize } from './authorize';
 import { exchangeCodeForToken } from './token';
 import { Page } from './enums/pageStatus';
 
+import{createApp} from 'vue';
+import App from './App.vue';
+
+createApp(App).mount('#app');
+
 //#region 添加contextBridge所需監聽、發送事件
 window.electronAPI.testPath((_event, value) => {
     console.log("testPath", value);

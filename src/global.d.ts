@@ -14,3 +14,9 @@ declare interface Window {
         testPath(callback: (event: any, value: string) => void): void;
     };
 }
+
+declare module "*.vue" {
+    import { ComponentOptions } from "vue"
+    const componentOptions: ComponentOptions
+    export default componentOptions
+  }
