@@ -1,21 +1,18 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "Titlebar",
-});
+<script setup>
+defineProps(["title"]);
 </script>
 
 <template>
+  <button id="title-bar"> {{ title }}</button>
 </template>
 
 <style>
-/* #title-bar {
+#title-bar {
   color: red;
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 1920px;
+  width: 100%;
   height: 30px;
-} */
+}
 </style>
