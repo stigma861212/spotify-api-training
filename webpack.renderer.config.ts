@@ -10,7 +10,14 @@ rules.push(
   {
     test: /\.vue$/,
     use: [{ loader: 'vue-loader' }]
-  }
+  },
+  {
+    test: /\.png$/,
+    type: 'asset/resource',
+    generator: {
+      filename: 'img/[hash][ext][query]',
+    },
+  },
 );
 
 export const rendererConfig: Configuration = {

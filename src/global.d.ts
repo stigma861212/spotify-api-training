@@ -1,4 +1,5 @@
 declare interface Window {
+    /**electron創建方法集合  */
     electronAPI: {
         /**取得客戶端資料 */
         getClientData(): Promise<any>;
@@ -16,7 +17,8 @@ declare interface Window {
 }
 
 declare module "*.vue" {
-    import { ComponentOptions } from "vue"
-    const componentOptions: ComponentOptions
-    export default componentOptions
+    import type {DefineComponent} from 'vue'
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const component: DefineComponent<object, object, any>
+    export default component
   }

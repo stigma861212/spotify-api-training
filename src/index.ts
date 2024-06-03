@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, net, protocol } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, net, protocol } from 'electron';
 import { IClientData } from './type/global.interface';
 import dotenv from 'dotenv';
 import { Page } from './enums/pageStatus';
@@ -31,15 +31,20 @@ let mainWindow: BrowserWindow;
 const createWindow = (): void => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1280,
-    height: 720,
+    width: 1920,
+    height: 1080,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
+    titleBarStyle: 'hidden',
   });
+  
+  // NOTE: 僅關閉工具列
+  mainWindow.setMenu(null);
+  // NOTE: 選單快捷方式全部關掉
+  // Menu.setApplicationMenu(null);
 
   // and load the index.html of the app.
-
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // If in test mode, open the DevTools.
