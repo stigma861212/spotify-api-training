@@ -38,7 +38,7 @@ const createWindow = (): void => {
     },
     titleBarStyle: 'hidden',
   });
-  
+
   // NOTE: 僅關閉工具列
   mainWindow.setMenu(null);
   // NOTE: 選單快捷方式全部關掉
@@ -119,14 +119,30 @@ ipcMain.handle("getClientData", () => {
   return JSON.stringify(data);
 });
 
+ipcMain.on("minimize", (event: Electron.IpcMainEvent) => {
+  mainWindow.minimize();
+})
+
+ipcMain.on("autoResize", (event: Electron.IpcMainEvent) => {
+  if (mainWindow.isMaximized()) {
+    mainWindow.unmaximize();
+  } else {
+    mainWindow.maximize();
+  }
+})
+
+ipcMain.on("close", (event: Electron.IpcMainEvent) => {
+  mainWindow.close();
+})
+
 /**跳轉頁面功能 */
 ipcMain.on('switchPage', (event: Electron.IpcMainEvent, page: string) => {
 
   mainWindow.webContents.send("testPath", page);
 
-    if (page == Page.MainPage) {
-      mainWindow.loadURL(MUSIC_MAIN_WINDOW_WEBPACK_ENTRY);
-    }
+  if (page == Page.MainPage) {
+    mainWindow.loadURL(MUSIC_MAIN_WINDOW_WEBPACK_ENTRY);
+  }
 
   // TODO:要做
   // const exampleFilePath = getFilePath(page);

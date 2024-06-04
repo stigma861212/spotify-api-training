@@ -13,12 +13,18 @@ declare interface Window {
          * @param callback 接字串用fn
          */
         testPath(callback: (event: any, value: string) => void): void;
+        /**視窗最小化 */
+        windowMinimize():void;
+        /**視窗放大縮小 */
+        windowAutoResize():void;
+        /**視窗關閉 */
+        windowClose():void;
     };
 }
 
 declare module "*.vue" {
-    import type {DefineComponent} from 'vue'
+    import type { DefineComponent } from 'vue'
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const component: DefineComponent<object, object, any>
     export default component
-  }
+}

@@ -1,14 +1,26 @@
-<script setup>
-</script>
-
 <template>
   <div id="title-bar"></div>
   <div id="window-button-group">
-    <div id="window-minmize" class="window-button"></div>
-    <div id="window-maxmize" class="window-button"></div>
-    <div id="window-close" class="window-button"></div>
+    <div v-on:click="minmize" id="window-minmize" class="window-button"></div>
+    <div v-on:click="maxmize" id="window-maxmize" class="window-button"></div>
+    <div v-on:click="close" id="window-close" class="window-button"></div>
   </div>
 </template>
+
+<script setup>
+/**視窗最小化 */
+const minmize = () => {
+  window.electronAPI.windowMinimize();
+}
+/**視窗放大縮小 */
+const maxmize = () => {
+  window.electronAPI.windowAutoResize();
+}
+/**視窗關閉 */
+const close = () => {
+  window.electronAPI.windowClose();
+}
+</script>
 
 <style>
 #title-bar {
