@@ -24,10 +24,10 @@ const close = () => {
 
 <style>
 #title-bar {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
-  background-color: #191414;
+  background-color: #131313;
   width: 100%;
   height: 25px;
   -webkit-app-region: drag;
@@ -46,7 +46,7 @@ const close = () => {
 
 .window-button {
   position: relative;
-  background-color: #191414;
+  background-color: #131313;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

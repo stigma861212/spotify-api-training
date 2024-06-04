@@ -1,12 +1,21 @@
 <template>
   <Titlebar />
-  <h1>💖 Hello index World!Spotify.</h1>
-  <p>Welcome to your Electron application.</p>
-  <button id="loginButton">Login with Spotify</button>
+  <Login />
 </template>
 
 <script setup lang="ts">
 import Titlebar from "./component/Titlebar.vue";
+import Login from "./component/Login.vue";
 </script>
 
-<style></style>
+<style>
+body {
+  margin: 0px;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+</style>

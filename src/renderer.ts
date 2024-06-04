@@ -2,7 +2,7 @@ import { redirectToSpotifyAuthorize } from './authorize';
 import { exchangeCodeForToken } from './token';
 import { Page } from './enums/pageStatus';
 
-import{createApp} from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
 
 createApp(App).mount('#app');
