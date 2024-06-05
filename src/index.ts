@@ -23,10 +23,17 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 declare const MUSIC_MAIN_WINDOW_WEBPACK_ENTRY: string;
 /**首頁腳本 */
 declare const MUSIC_MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+/**Oauth頁 */
+declare const OAUTH_WINDOW_WEBPACK_ENTRY: string;
+/**Oauth頁腳本*/
+declare const OAUTH_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+
 //#endregion
 
 /**初始頁加載視窗 */
 let mainWindow: BrowserWindow;
+/**Oauth頁加載視窗 */
+let oauthWindow: BrowserWindow;
 
 const createWindow = (): void => {
   // Create the browser window.
@@ -77,12 +84,11 @@ if (app.isPackaged) {
     // 攔截redirecturi後取得網址參數導向實際url
     protocol.handle('http', (request) => {
       console.log("protocol", request.url);
-
-      if (request.url.includes('main_window')) {
-        // NOTE: 理論上回傳process.env.REDIRECTURI
-        mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY + request.url.slice(process.env.REDIRECTURI.length));
+      mainWindow.webContents.send("testPath", request.url.slice(process.env.REDIRECTURI.length));
+      if (request.url.includes('oauth_window')) {
+        // NOTE: 回傳oauth原始路徑和附帶參數
+        oauthWindow.loadURL(OAUTH_WINDOW_WEBPACK_ENTRY + request.url.slice(process.env.REDIRECTURI.length));
       }
-
       return new Promise<Response>(() => { });
     })
   })
@@ -119,6 +125,29 @@ ipcMain.handle("getClientData", () => {
   return JSON.stringify(data);
 });
 
+ipcMain.on('openOauthWindow', (event: Electron.IpcMainEvent, url: string, verifier: string, state: string) => {
+  console.log("verifier:", verifier);
+  console.log("state:", state);
+  oauthWindow = new BrowserWindow({
+    width: 500,
+    height: 700,
+    webPreferences: {
+      preload: OAUTH_WINDOW_PRELOAD_WEBPACK_ENTRY,
+    },
+  });
+
+  oauthWindow.setMenu(null);
+
+  oauthWindow.loadURL(OAUTH_WINDOW_WEBPACK_ENTRY).then(() => {
+    oauthWindow.webContents.send("oauthData", verifier, state);
+    oauthWindow.loadURL(url);
+  });
+
+  if (!app.isPackaged) {
+    oauthWindow.webContents.openDevTools();
+  }
+});
+
 ipcMain.on("minimize", (event: Electron.IpcMainEvent) => {
   mainWindow.minimize();
 })
@@ -132,7 +161,12 @@ ipcMain.on("autoResize", (event: Electron.IpcMainEvent) => {
 })
 
 ipcMain.on("close", (event: Electron.IpcMainEvent) => {
-  mainWindow.close();
+  const windows = BrowserWindow.getAllWindows();
+  windows.forEach(window => {
+    if (!window.isDestroyed()) {
+      window.close();
+    }
+  });
 })
 
 /**跳轉頁面功能 */
@@ -155,6 +189,23 @@ ipcMain.on('switchPage', (event: Electron.IpcMainEvent, page: string) => {
   // C:\Git\spotify-api-training\out\spotify-api-training-win32-x64\resources\app.asar\.vite\build
   // mainWindow.webContents.send("testPath", __dirname);
 
+});
+
+/**跳轉頁面功能 */
+ipcMain.on('oauthComplete', (event: Electron.IpcMainEvent, state: string) => {
+
+  /**轉換成布林狀態判斷 */
+  const stateParse: boolean = JSON.parse(state) as boolean;
+
+  oauthWindow.close();
+  oauthWindow = null; // Make sure to dereference the window object
+
+  if (stateParse) {
+    // NOTE:for user experience to delay
+    setTimeout(() => {
+      mainWindow.webContents.reload();
+    }, 1000);
+  }
 });
 
 //#endregion

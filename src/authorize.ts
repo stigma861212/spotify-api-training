@@ -30,5 +30,9 @@ export async function redirectToSpotifyAuthorize() {
     authorizeUrl.searchParams.append('state', state);
     authorizeUrl.searchParams.append('scope', 'user-read-private user-read-email');
 
-    window.location.href = authorizeUrl.toString();
+    // TODO: create new window to open this href.
+
+    window.electronAPI.openOauthWindow(authorizeUrl.toString(), codeVerifier, state);
+
+    // window.location.href = authorizeUrl.toString();
 }

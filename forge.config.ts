@@ -34,6 +34,14 @@ const config: ForgeConfig = {
             },
           },
           {
+            html: './src/oauth/index.html',
+            js: './src/oauth/oauth.ts',
+            name:'oauth_window',
+            preload: {
+              js: './src/oauth/preload.ts',
+            },
+          },
+          {
             html: './src/music/main/main.html',
             js: './src/music/main/main.ts',
             name: 'music_main_window',

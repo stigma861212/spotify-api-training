@@ -4,6 +4,10 @@ declare interface Window {
         /**取得客戶端資料 */
         getClientData(): Promise<any>;
         /**
+         * oauth驗證流程完成
+         */
+        oauthComplete(state: boolean): void;
+        /**
          * 切換頁面
          * @param page 頁面名稱
          */
@@ -13,12 +17,23 @@ declare interface Window {
          * @param callback 接字串用fn
          */
         testPath(callback: (event: any, value: string) => void): void;
+        /**
+         * 取得main_window驗證資料
+         */
+        oauthData(callback: (event: any, verifier: string, state: string) => void): void;
+        /**
+         * 打開spotify oauth 頁面
+         * @param url oauth url
+         * @param verifier 驗證器
+         * @param state 驗證比對碼
+         */
+        openOauthWindow(url: string, verifier: string, state: sring): void;
         /**視窗最小化 */
-        windowMinimize():void;
+        windowMinimize(): void;
         /**視窗放大縮小 */
-        windowAutoResize():void;
+        windowAutoResize(): void;
         /**視窗關閉 */
-        windowClose():void;
+        windowClose(): void;
     };
 }
 
