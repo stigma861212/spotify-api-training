@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { IClientData } from '../type/global.interface';
-import { exchangeCodeForToken } from '../token';
+import { exchangeCodeForToken } from './token';
 
 createApp(App).mount('#app');
 

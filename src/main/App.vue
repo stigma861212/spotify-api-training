@@ -4,8 +4,8 @@
 </template>
 
 <script setup lang="ts">
-import Titlebar from "./component/Titlebar.vue";
-import Login from "./component/Login.vue";
+import Titlebar from "../component/Titlebar.vue";
+import Login from "../component/Login.vue";
 </script>
 
 <style>

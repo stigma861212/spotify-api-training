@@ -26,17 +26,17 @@ const config: ForgeConfig = {
         config: rendererConfig,
         entryPoints: [
           {
-            html: './src/index.html',
-            js: './src/renderer.ts',
+            html: './src/main/index.html',
+            js: './src/main/renderer.ts',
             name: 'main_window',
             preload: {
-              js: './src/preload.ts',
+              js: './src/main/preload.ts',
             },
           },
           {
             html: './src/oauth/index.html',
             js: './src/oauth/oauth.ts',
-            name:'oauth_window',
+            name: 'oauth_window',
             preload: {
               js: './src/oauth/preload.ts',
             },

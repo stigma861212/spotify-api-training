@@ -1,5 +1,5 @@
 import { generateCodeVerifier, generateCodeChallenge } from './pkce';
-import { IClientData } from './type/global.interface';
+import { IClientData } from '../type/global.interface';
 
 // NOTE: https://developer.spotify.com/
 /**驗證比對亂碼 */
@@ -30,9 +30,5 @@ export async function redirectToSpotifyAuthorize() {
     authorizeUrl.searchParams.append('state', state);
     authorizeUrl.searchParams.append('scope', 'user-read-private user-read-email');
 
-    // TODO: create new window to open this href.
-
     window.electronAPI.openOauthWindow(authorizeUrl.toString(), codeVerifier, state);
-
-    // window.location.href = authorizeUrl.toString();
 }

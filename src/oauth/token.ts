@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { ITokenResponse } from './type/token.interface';
-import { IClientData } from './type/global.interface';
+import { ITokenResponse } from '../type/token.interface';
+import { IClientData } from '../type/global.interface';
 
 /**
  * 網址參數取得token
