@@ -1,11 +1,10 @@
 <template>
   <Titlebar />
-  <Login />
+  <router-view></router-view>
 </template>
 
 <script setup lang="ts">
 import Titlebar from "../component/Titlebar.vue";
-import Login from "../component/Login.vue";
 </script>
 
 <style>
@@ -14,6 +13,7 @@ body {
 }
 
 #app {
+  background-color: black;
   display: flex;
   flex-direction: column;
   height: 100vh;

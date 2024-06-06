@@ -52,12 +52,14 @@ const createWindow = (): void => {
   // Menu.setApplicationMenu(null);
 
   // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY).then(()=>{
+    mainWindow.webContents.send("testPath", MAIN_WINDOW_WEBPACK_ENTRY);
+  });
 
   // If in test mode, open the DevTools.
-  if (!app.isPackaged) {
+  // if (!app.isPackaged) {
     mainWindow.webContents.openDevTools();
-  }
+  // }
 };
 
 // This method will be called when Electron has finished

@@ -2,21 +2,59 @@
   <div class="login-group">
     <img id="icon" src="../img/spotify-ori.png" alt="" srcset="">
     <div class="button-box">
-      <div id="loginButton"></div>
+      <div v-on:click="login" id="loginButton"></div>
       <p>Login</p>
+      <div v-on:click="test1" id="test"></div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+import { redirectToSpotifyAuthorize } from '../main/authorize';
+import router from '../router/router';
 
+window.electronAPI.testPath((_event, value) => {
+  console.log("testPath", value);
+})
+
+/**登入按鈕 */
+const login = () => {
+  redirectToSpotifyAuthorize();
+}
+
+// TEMP:測試用
+const test1 = () => {
+  router.push("/home");
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log("login DOMContentLoaded", window.location.href);
+  checkStore();
+});
+
+/**確認token儲存情況 */
+function checkStore() {
+  const accessToken = localStorage.getItem("access_token");
+  const refreshToken = localStorage.getItem('refresh_token');
+  const expiresIn = localStorage.getItem('expires_in');
+
+  if (accessToken && refreshToken && expiresIn) {
+    console.log("have join this experience");
+    router.push("/home");
+  }
+}
 </script>
 
 <style>
+#test {
+  width: 100px;
+  height: 100px;
+  background-color: aliceblue;
+}
+
 .login-group {
   position: relative;
   display: flex;
-  background-color: #000000;
   width: 100%;
   height: 100%;
   justify-content: center;

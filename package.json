@@ -48,6 +48,7 @@
     "electron-squirrel-startup": "^1.0.1",
     "vue": "^3.4.27",
     "vue-loader": "^17.4.2",
+    "vue-router": "^4.3.2",
     "vue-template-compiler": "^2.7.16"
   }
 }
