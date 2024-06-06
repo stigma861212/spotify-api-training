@@ -12,4 +12,27 @@ const router = createRouter({
   routes
 });
 
+router.beforeEach((to, from, next) => {
+  console.log('Navigating from', from.path, 'to', to.path);
+  if (to.path == "/") {
+    checkStore();
+    next();
+  }
+  else {
+    next();
+  }
+});
+
+/**確認token儲存情況 */
+export function checkStore() {
+  const accessToken = localStorage.getItem("access_token");
+  const refreshToken = localStorage.getItem('refresh_token');
+  const expiresIn = localStorage.getItem('expires_in');
+
+  if (accessToken && refreshToken && expiresIn) {
+    console.log("have join this experience");
+    router.push("/home");
+  }
+}
+
 export default router;

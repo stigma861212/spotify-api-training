@@ -19,14 +19,14 @@ console.log("NavigationBar");
 }
 
 #common-navigation-bar {
-    background-color: red;
+    background-color: #131313;
     width: 150px;
     height: 100%;
     border-radius: 10px;
 }
 
 #music-library-bar {
-    background-color: aqua;
+    background-color: #131313;
     border-radius: 10px;
 }
 </style>
