@@ -17,6 +17,6 @@ console.log("Home");
     grid-template-columns: 150px 1fr;
     gap: 10px;
     height: 100%;
-    padding: 10px;
+    padding: 35px 10px 10px 10px;
 }
 </style>

@@ -9,7 +9,9 @@ import Titlebar from "../component/Titlebar.vue";
 
 <style>
 body {
+  /* height: 100vh; */
   margin: 0px;
+  overflow: hidden;
 }
 
 #app {

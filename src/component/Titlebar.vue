@@ -24,9 +24,7 @@ const close = () => {
 
 <style>
 #title-bar {
-  position: relative;
-  top: 0px;
-  left: 0px;
+  position: fixed;
   background-color: #131313;
   width: 100%;
   height: 25px;
