@@ -2,9 +2,9 @@
   <div class="login-group">
     <img id="icon" src="../img/spotify-ori.png" alt="" srcset="">
     <div class="button-box">
-      <div v-on:click="login" id="loginButton"></div>
+      <div @click="login" id="loginButton"></div>
       <p>Login</p>
-      <div v-on:click="test1" id="test"></div>
+      <div @click="test1" id="test"></div>
     </div>
   </div>
 </template>

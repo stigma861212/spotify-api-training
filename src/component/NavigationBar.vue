@@ -1,16 +1,8 @@
 <template>
     <div id="navigation-bar-group">
         <div id="common-navigation-bar">
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
-            <NavigationButton />
+            <NavigationButton @click="goHome" :contentText=contentText.HomePage />
+            <NavigationButton :contentText=contentText.Search />
         </div>
         <div id="musicLibrary-navigation-bar">
         </div>
@@ -18,8 +10,17 @@
 </template>
 
 <script setup>
-import NavigationButton from "./NavigationButton.vue"
+import { contentText } from "../enums/contentText";
+import router from '../router/router';
+import NavigationButton from "./NavigationButton.vue";
 console.log("NavigationBar");
+
+/**到首頁 */
+const goHome = () => {
+    console.log("GoHome");
+    router.push("/home");
+}
+
 </script>
 
 <style>

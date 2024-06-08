@@ -1,12 +1,17 @@
 <template>
     <div class="navigation-button-group">
         <div class="navigation-button"></div>
-        <p>123</p>
+        <p>{{ contentText }}</p>
     </div>
 </template>
 
 <script setup>
 console.log("NavigationButton");
+
+const props = defineProps({
+    contentText: String,
+});
+
 </script>
 
 <style>

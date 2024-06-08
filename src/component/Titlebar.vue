@@ -1,9 +1,9 @@
 <template>
   <div id="title-bar"></div>
   <div id="window-button-group">
-    <div v-on:click="minmize" id="window-minmize" class="window-button"></div>
-    <div v-on:click="maxmize" id="window-maxmize" class="window-button"></div>
-    <div v-on:click="close" id="window-close" class="window-button"></div>
+    <div @click="minmize" id="window-minmize" class="window-button"></div>
+    <div @click="maxmize" id="window-maxmize" class="window-button"></div>
+    <div @click="close" id="window-close" class="window-button"></div>
   </div>
 </template>
 

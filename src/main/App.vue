@@ -11,6 +11,7 @@ import Titlebar from "../component/Titlebar.vue";
 body {
   /* height: 100vh; */
   margin: 0px;
+  user-select: none;
   overflow: hidden;
 }
 
