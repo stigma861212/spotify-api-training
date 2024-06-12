@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { IClientData } from '../type/global.interface';
-import { exchangeCodeForToken } from './token';
+import { checkStore, exchangeCodeForToken } from './token';
 
 createApp(App).mount('#app');
 
@@ -47,18 +47,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (authCode) {
         await exchangeCodeForToken(authCode).catch(console.error);
         window.history.pushState({}, null, '/');
-        checkStore();
+        if (checkStore()) {
+            console.log("access go in");
+            window.electronAPI.oauthComplete(true);
+        }
     }
 });
 
-/**確認token存儲狀態 */
-function checkStore() {
-    const accessToken = localStorage.getItem("access_token");
-    const refreshToken = localStorage.getItem('refresh_token');
-    const expiresIn = localStorage.getItem('expires_in');
+// /**確認token存儲狀態 */
+// function checkStore() {
+//     const accessToken = localStorage.getItem("access_token");
+//     const refreshToken = localStorage.getItem('refresh_token');
+//     const expiresIn = localStorage.getItem('expires_in');
 
-    if (accessToken && refreshToken && expiresIn) {
-        console.log("access go in");
-        window.electronAPI.oauthComplete(true);
-    }
-}
+//     if (accessToken && refreshToken && expiresIn) {
+//         console.log("access go in");
+//         window.electronAPI.oauthComplete(true);
+//     }
+// }

@@ -42,3 +42,18 @@ export async function exchangeCodeForToken(authCode: string) {
         console.error('Error exchanging code for token:', error);
     }
 }
+
+/**確認token存儲狀態 */
+export function checkStore(): boolean {
+    const accessToken = localStorage.getItem("access_token");
+    const refreshToken = localStorage.getItem('refresh_token');
+    const expiresIn = localStorage.getItem('expires_in');
+
+    if (accessToken && refreshToken && expiresIn) {
+        console.log("access go in");
+        return true;
+    }
+    else {
+        return false;
+    }
+}

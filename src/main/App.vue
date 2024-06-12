@@ -1,6 +1,6 @@
 <template>
   <Titlebar />
-  <router-view></router-view>
+  <router-view />
 </template>
 
 <script setup lang="ts">
@@ -9,10 +9,13 @@ import Titlebar from "../component/Titlebar.vue";
 
 <style>
 body {
-  /* height: 100vh; */
   margin: 0px;
   user-select: none;
   overflow: hidden;
+}
+
+img {
+  pointer-events: none;
 }
 
 #app {

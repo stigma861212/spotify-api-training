@@ -1,6 +1,6 @@
 <template>
   <div class="login-group">
-    <img id="icon" src="../img/spotify-ori.png" alt="" srcset="">
+    <img id="icon" src="../img/Icons/Spotify_Icon_RGB_Green.png" alt="" srcset="">
     <div class="button-box">
       <div @click="login" id="loginButton"></div>
       <p>Login</p>
@@ -10,6 +10,7 @@
 </template>
 
 <script lang="ts" setup>
+import { checkStore } from '../oauth/token';
 import { redirectToSpotifyAuthorize } from '../main/authorize';
 import router from '../router/router';
 
@@ -29,20 +30,13 @@ const test1 = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("login DOMContentLoaded", window.location.href);
-  checkStore();
-});
-
-/**確認token儲存情況 */
-function checkStore() {
-  const accessToken = localStorage.getItem("access_token");
-  const refreshToken = localStorage.getItem('refresh_token');
-  const expiresIn = localStorage.getItem('expires_in');
-
-  if (accessToken && refreshToken && expiresIn) {
+  if (checkStore()) {
     console.log("have join this experience");
-    router.push("/home");
+    setTimeout(() => {
+      router.push("/home");
+    }, 2000);
   }
-}
+});
 </script>
 
 <style>

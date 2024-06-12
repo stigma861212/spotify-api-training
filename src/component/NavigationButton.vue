@@ -5,12 +5,12 @@
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 console.log("NavigationButton");
 
-const props = defineProps({
-    contentText: String,
-});
+const props = defineProps<{
+    contentText: string,
+}>();
 
 </script>
 
