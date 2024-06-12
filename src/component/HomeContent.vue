@@ -1,13 +1,14 @@
 <template>
-    <div id="explore-bar-group"></div>
+    <div id="content-group"></div>
 </template>
 
 <script setup>
-console.log("ExploreBar");
+console.log("HomeContent");
+
 </script>
 
 <style>
-#explore-bar-group {
+#content-group {
     width: 100%;
     height: 100%;
     border-radius: 10px;

@@ -7,13 +7,13 @@
 
 <script setup>
 import NavigationBar from "../NavigationBar.vue";
-import ExploreBar from "../ExploreBar.vue";
+// import Explore from "../Explore.vue";
 console.log("Home");
 
-const toTest = () => {
-    console.log("test");
-    router.push("/home/explore");
-}
+// const toTest = () => {
+//     console.log("test");
+//     router.push("/home/explore");
+// }
 
 </script>
 

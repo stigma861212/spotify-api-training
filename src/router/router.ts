@@ -1,9 +1,9 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import Login from '../component/Login.vue';
 import Home from '../component/page/Home.vue';
-import ExploreBar from '../component/ExploreBar.vue';
+import Explore from '../component/Explore.vue';
 import UserProfile from '../component/UserProfile.vue';
-import HomeInitial from '../component/HomeInitial.vue';
+import HomeContent from '../component/HomeContent.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,12 +19,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         name: "HomeInitial",
-        component: HomeInitial,
+        component: HomeContent,
       },
       {
         path: 'explore',
         name: "Explore",
-        component: ExploreBar,
+        component: Explore,
       },
       {
         path: 'profile',
