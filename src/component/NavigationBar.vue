@@ -4,7 +4,7 @@
         <div id="common-navigation-bar">
             <NavigationButton @click="goHome" :contentText=contentText.HomePage />
             <NavigationButton @click="goProfile" :contentText=contentText.UserProfile />
-            <NavigationButton :contentText=contentText.Search />
+            <NavigationButton @click="goExplore" :contentText=contentText.Search />
         </div>
         <div id="musicLibrary-navigation-bar">
         </div>
@@ -47,6 +47,12 @@ const goProfile = () => {
         console.log("data", data);
         router.push({ path: "/home/profile", query: { data: JSON.stringify(data) } });
     });
+}
+
+const goExplore = () => {
+    console.log("goExplore");
+    router.push("/home/explore");
+    // router.push({ path: "/home/profile", query: { data: JSON.stringify(data) } });
 }
 
 </script>
