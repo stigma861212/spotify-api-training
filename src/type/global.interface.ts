@@ -6,3 +6,8 @@ export interface IClientData {
     /**重導向網址 */
     redirectUri: string;
 }
+
+export interface ISize {
+    width: number;
+    height: number;
+}

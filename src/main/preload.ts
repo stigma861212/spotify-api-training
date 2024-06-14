@@ -19,6 +19,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
      */
     testPath: (callback: (event: any, value: string) => void): Electron.IpcRenderer => ipcRenderer.on('testPath', callback),
     /**
+     * 接`index.ts`回傳字串，測試用
+     * @param callback 接字串用fn
+     */
+    resizeWindow: (callback: (event: any, value: string) => void): Electron.IpcRenderer => ipcRenderer.on('resizeWindow', callback),
+    /**
      * 打開spotify oauth 頁面
      * @param url oauth url
      */

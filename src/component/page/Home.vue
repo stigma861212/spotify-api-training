@@ -19,10 +19,10 @@ console.log("Home");
 
 <style>
 #home-container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
+    display: flex;
     gap: 10px;
-    height: 100%;
+    height: calc(100% - 45px);
+    width: calc(100% - 20px);
     padding: 35px 10px 10px 10px;
 }
 </style>

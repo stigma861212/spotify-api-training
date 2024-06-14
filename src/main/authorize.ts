@@ -28,7 +28,7 @@ export async function redirectToSpotifyAuthorize() {
     authorizeUrl.searchParams.append('code_challenge_method', 'S256');
     authorizeUrl.searchParams.append('code_challenge', codeChallenge);
     authorizeUrl.searchParams.append('state', state);
-    authorizeUrl.searchParams.append('scope', 'user-read-private user-read-email');
+    authorizeUrl.searchParams.append('scope', 'user-read-private user-read-email user-library-read user-library-modify playlist-read-private playlist-modify-private user-top-read');
 
     window.electronAPI.openOauthWindow(authorizeUrl.toString(), codeVerifier, state);
 }

@@ -46,19 +46,22 @@ const createWindow = (): void => {
     titleBarStyle: 'hidden',
   });
 
+  mainWindow.on("resize", sendSize);
+
   // NOTE: 僅關閉工具列
   mainWindow.setMenu(null);
   // NOTE: 選單快捷方式全部關掉
   // Menu.setApplicationMenu(null);
 
   // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY).then(()=>{
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY).then(() => {
+    sendSize();
     mainWindow.webContents.send("testPath", MAIN_WINDOW_WEBPACK_ENTRY);
   });
 
   // If in test mode, open the DevTools.
   // if (!app.isPackaged) {
-    mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
   // }
 };
 
@@ -160,6 +163,7 @@ ipcMain.on("autoResize", (event: Electron.IpcMainEvent) => {
   } else {
     mainWindow.maximize();
   }
+  sendSize();
 })
 
 ipcMain.on("close", (event: Electron.IpcMainEvent) => {
@@ -171,27 +175,27 @@ ipcMain.on("close", (event: Electron.IpcMainEvent) => {
   });
 })
 
-/**跳轉頁面功能 */
-ipcMain.on('switchPage', (event: Electron.IpcMainEvent, page: string) => {
+// /**跳轉頁面功能 */
+// ipcMain.on('switchPage', (event: Electron.IpcMainEvent, page: string) => {
 
-  mainWindow.webContents.send("testPath", page);
+//   mainWindow.webContents.send("testPath", page);
 
-  if (page == Page.MainPage) {
-    mainWindow.loadURL(MUSIC_MAIN_WINDOW_WEBPACK_ENTRY);
-  }
+//   if (page == Page.MainPage) {
+//     mainWindow.loadURL(MUSIC_MAIN_WINDOW_WEBPACK_ENTRY);
+//   }
 
-  // TODO:要做
-  // const exampleFilePath = getFilePath(page);
+//   // TODO:要做
+//   // const exampleFilePath = getFilePath(page);
 
-  // mainWindow.webContents.send("testPath", page);
+//   // mainWindow.webContents.send("testPath", page);
 
-  // C:\Git\spotify-api-training\out\spotify-api-training-win32-x64\resources\app.asar\src\page\login.html
-  // mainWindow.webContents.send("testPath", exampleFilePath);
+//   // C:\Git\spotify-api-training\out\spotify-api-training-win32-x64\resources\app.asar\src\page\login.html
+//   // mainWindow.webContents.send("testPath", exampleFilePath);
 
-  // C:\Git\spotify-api-training\out\spotify-api-training-win32-x64\resources\app.asar\.vite\build
-  // mainWindow.webContents.send("testPath", __dirname);
+//   // C:\Git\spotify-api-training\out\spotify-api-training-win32-x64\resources\app.asar\.vite\build
+//   // mainWindow.webContents.send("testPath", __dirname);
 
-});
+// });
 
 /**跳轉頁面功能 */
 ipcMain.on('oauthComplete', (event: Electron.IpcMainEvent, state: string) => {
@@ -211,3 +215,10 @@ ipcMain.on('oauthComplete', (event: Electron.IpcMainEvent, state: string) => {
 });
 
 //#endregion
+
+/**傳送尺寸 */
+function sendSize() {
+  let size = mainWindow.getContentSize();
+  // console.log("size", size);
+  mainWindow.webContents.send("resizeWindow", JSON.stringify(size));
+}

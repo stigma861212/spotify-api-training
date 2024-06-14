@@ -28,6 +28,8 @@ declare interface Window {
          * @param state 驗證比對碼
          */
         openOauthWindow(url: string, verifier: string, state: sring): void;
+        /**更新視窗大小 */
+        resizeWindow(callback: (event: any, value: string) => void): void;
         /**視窗最小化 */
         windowMinimize(): void;
         /**視窗放大縮小 */
