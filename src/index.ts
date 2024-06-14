@@ -19,10 +19,10 @@ if (require('electron-squirrel-startup')) {
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 /**初始頁腳本 */
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
-/**首頁 */
-declare const MUSIC_MAIN_WINDOW_WEBPACK_ENTRY: string;
-/**首頁腳本 */
-declare const MUSIC_MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+// /**首頁 */
+// declare const MUSIC_MAIN_WINDOW_WEBPACK_ENTRY: string;
+// /**首頁腳本 */
+// declare const MUSIC_MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 /**Oauth頁 */
 declare const OAUTH_WINDOW_WEBPACK_ENTRY: string;
 /**Oauth頁腳本*/
