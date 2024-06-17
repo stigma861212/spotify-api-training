@@ -7,13 +7,7 @@
 
 <script setup>
 import NavigationBar from "../NavigationBar.vue";
-// import Explore from "../Explore.vue";
 console.log("Home");
-
-// const toTest = () => {
-//     console.log("test");
-//     router.push("/home/explore");
-// }
 
 </script>
 
