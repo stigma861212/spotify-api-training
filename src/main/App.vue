@@ -10,6 +10,7 @@ import { ISize } from "../type/global.interface";
 
 onMounted(() => {
   console.log("mounted");
+  window.electronAPI.windowResize();
   window.electronAPI.resizeWindow((_event, value) => {
     const parseValue: Array<number> = JSON.parse(value);
     const size: ISize = {
