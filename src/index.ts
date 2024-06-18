@@ -153,6 +153,10 @@ ipcMain.on('openOauthWindow', (event: Electron.IpcMainEvent, url: string, verifi
   }
 });
 
+ipcMain.on("windowResize", (event: Electron.IpcMainEvent) => {
+  sendSize();
+})
+
 ipcMain.on("minimize", (event: Electron.IpcMainEvent) => {
   mainWindow.minimize();
 })

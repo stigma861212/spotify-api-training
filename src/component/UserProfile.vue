@@ -6,26 +6,14 @@
         </div>
         <h1>本月最熱門曲目</h1>
         <div id="popular-tracks-group">
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
-            <Track />
+            <Track v-for="(track, index) in tracks" :key="track.id" :track="track" :index="index" />
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { IArtist, IProfile, ITopArtists, ITopTracks } from '../type/spotify.interface';
-import { defineProps, onMounted, ref } from 'vue';
+import { IArtist, IProfile, ITopArtists, ITopTracks, ITrack } from '../type/spotify.interface';
+import { defineProps, onMounted, reactive, ref } from 'vue';
 import Track from "./Track.vue";
 console.log("UserProfile");
 
@@ -35,19 +23,13 @@ const props = defineProps<{
 
 const profilePhoto = ref<HTMLImageElement | null>(null)
 
+const tracks = reactive<ITrack[]>(props.data[1].items);
 onMounted(() => {
-    console.log("track", props.data[1]);
-    const tracks = props.data[1].items;
-
     try {
         profilePhoto.value.src = props.data[0].images[1].url;
     } catch (error) {
         console.log("profile photo none");
     }
-
-    tracks.forEach((track, index) => {
-        console.log(track.name);
-    })
 })
 
 </script>
@@ -101,6 +83,7 @@ h1 {
 .track-group {
     width: 100%;
     height: 50px;
-    background-color: antiquewhite;
+    background-color: #131313;
+    overflow: hidden
 }
 </style>

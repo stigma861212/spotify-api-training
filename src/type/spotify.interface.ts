@@ -1,3 +1,93 @@
+export interface IAlbum {
+    album_type: string,
+    total_tracks: number,
+    available_markets: Array<string>,
+    external_urls: {
+        spotify: string;
+    };
+    href: string,
+    id: string,
+    images: Array<IPicture>,
+    name: string,
+    release_date: string,
+    release_date_precision: string,
+    restrictions: {
+        reason: string
+    }
+    type: string,
+    uri: string,
+    artists: {
+        external_urls: {
+            spotify: string;
+        },
+        href: string,
+        id: string,
+        name: string,
+        type: string,
+        uri: string,
+    }[],
+    tracks: {
+        href: string,
+        limit: number,
+        next: string,
+        offset: number,
+        previous: string,
+        total: number,
+        items: {
+            artists: {
+                external_urls: {
+                    spotify: string;
+                },
+                href: string,
+                id: string,
+                name: string,
+                type: string,
+                uri: string,
+            }[],
+            available_markets: Array<string>,
+            disc_number: number,
+            duration_ms: number,
+            explicit: boolean,
+            external_urls: {
+                spotify: string;
+            },
+            href: string,
+            id: string,
+            is_playable: boolean,
+            linked_from: {
+                external_urls: {
+                    spotify: string;
+                    href: string,
+                    id: string,
+                    type: string,
+                    uri: string,
+                },
+            },
+            restrictions: {
+                reason: string
+            },
+            name: string,
+            preview_url: string,
+            track_number: number,
+            type: string,
+            uri: string,
+            islocal: boolean,
+        },
+    },
+    copyrights: {
+        text: string,
+        type: string,
+    },
+    external_ids: {
+        isrc: string
+        ean: string
+        upc: string
+    },
+    genres: Array<string>,
+    label: string,
+    popularity: number
+}
+
 /**
  * 取得使用者資料
  * 
@@ -47,14 +137,16 @@ export interface IArtist {
 }
 
 export interface ITrack {
-    album: object
-    artists: Array<any>
+    album: IAlbum
+    artists: Array<ITrackArtist>
     available_markets: Array<string>
     disc_number: number
     duration_ms: number
     explicit: boolean
     external_ids: object
-    external_urls: object
+    external_urls: {
+        spotify: string;
+    };
     href: string
     id: string
     is_local: boolean
@@ -72,4 +164,19 @@ export interface ITopArtists extends ITopItems {
 
 export interface ITopTracks extends ITopItems {
     items: Array<ITrack>
+}
+
+interface ITrackArtist {
+    external_urls: {
+        spotify: string;
+    };
+    followers: object
+    genres: Array<string>
+    href: string
+    id: string
+    images: Array<IPicture>
+    name: string
+    popularity: number
+    type: string
+    uri: string
 }
