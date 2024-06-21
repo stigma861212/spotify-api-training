@@ -7,22 +7,16 @@
 
 <script setup>
 import NavigationBar from "../NavigationBar.vue";
-// import Explore from "../Explore.vue";
 console.log("Home");
-
-// const toTest = () => {
-//     console.log("test");
-//     router.push("/home/explore");
-// }
 
 </script>
 
 <style>
 #home-container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
+    display: flex;
     gap: 10px;
-    height: 100%;
+    height: calc(100% - 45px);
+    width: calc(100% - 20px);
     padding: 35px 10px 10px 10px;
 }
 </style>

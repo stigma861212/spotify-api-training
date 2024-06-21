@@ -1,27 +1,33 @@
 <template>
     <div id="profile-group">
-        <img id="profile-photo" src="../img/user.png" ref="profilePhoto">
-        <h2 id="profile-name">{{ props.data.display_name }}</h2>
-        <!-- <h2 id="profile-name">{{ props.data.display_name }}</h2> -->
+        <div id="profile-data">
+            <img id="profile-photo" src="../img/user.png" ref="profilePhoto">
+            <h1 id="profile-name">{{ props.data[0].display_name }}</h1>
+        </div>
+        <h1>本月最熱門曲目</h1>
+        <div id="popular-tracks-group">
+            <Track v-for="(track, index) in tracks" :key="track.id" :track="track" :index="index" />
+        </div>
+        <h1>本月最熱門artists</h1>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { IProfile } from '../type/spotify.interface';
-import { defineProps, onMounted, ref } from 'vue';
+import { IArtist, IProfile, ITopArtists, ITopTracks, ITrack } from '../type/spotify.interface';
+import { defineProps, onMounted, reactive, ref } from 'vue';
+import Track from "./Track.vue";
 console.log("UserProfile");
 
 const props = defineProps<{
-    data: IProfile
+    data: [IProfile, ITopTracks, ITopArtists]
 }>();
 
 const profilePhoto = ref<HTMLImageElement | null>(null)
 
-// 在组件挂载时打印 data
+const tracks = reactive<ITrack[]>(props.data[1].items);
 onMounted(() => {
-    console.log(props.data);
     try {
-        profilePhoto.value.src = props.data.images[1].url;
+        profilePhoto.value.src = props.data[0].images[1].url;
     } catch (error) {
         console.log("profile photo none");
     }
@@ -31,14 +37,25 @@ onMounted(() => {
 
 <style>
 #profile-group {
-    display: flex;
     width: 100%;
-    height: 100%;
     border-radius: 10px;
     background-color: #131313;
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(100% - 10px);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#profile-group::-webkit-scrollbar {
+    display: none;
+}
+
+#profile-data {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
 }
 
 #profile-photo {
@@ -47,10 +64,27 @@ onMounted(() => {
     height: 300px;
     padding: 10px;
     border-radius: 50%;
-    object-fit: contain;
 }
 
 #profile-name {
     text-align: center;
+}
+
+h1 {
+    padding: 5px;
+}
+
+#popular-tracks-group {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.track-group {
+    width: 100%;
+    height: 50px;
+    background-color: #131313;
+    overflow: hidden
 }
 </style>

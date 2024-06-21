@@ -19,6 +19,13 @@ contextBridge.exposeInMainWorld('electronAPI', {
      */
     testPath: (callback: (event: any, value: string) => void): Electron.IpcRenderer => ipcRenderer.on('testPath', callback),
     /**
+     * 更新視窗尺寸
+     * @param callback 接字串用fn
+     */
+    resizeWindow: (callback: (event: any, value: string) => void): Electron.IpcRenderer => ipcRenderer.on('resizeWindow', callback),
+    /**取得視窗尺寸 */
+    windowResize: (): void => ipcRenderer.send('windowResize'),
+    /**
      * 打開spotify oauth 頁面
      * @param url oauth url
      */
