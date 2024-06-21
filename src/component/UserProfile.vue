@@ -8,6 +8,7 @@
         <div id="popular-tracks-group">
             <Track v-for="(track, index) in tracks" :key="track.id" :track="track" :index="index" />
         </div>
+        <h1>本月最熱門artists</h1>
     </div>
 </template>
 

@@ -58,7 +58,7 @@ onMounted(() => {
     text-overflow: ellipsis;
 } */
 
-.track-cell[data-v-591c4e50] {
+.track-cell {
     display: flex;
     align-items: center;
 }
@@ -74,11 +74,27 @@ onMounted(() => {
 
 .track-name {
     text-align: left;
+    max-width: 500px;
     flex: 1 0 200px;
+    overflow: hidden;
+}
+
+.track-name>div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .track-artist {
+    text-align: left;
+    max-width: 500px;
     flex: 1 0 200px;
+}
+
+.track-artist>div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .track-cell>img {
